@@ -17,15 +17,15 @@ def predict():
 
     # create spark session
     conf = SparkConf().setAppName("Linear Regression")
-    sc = SparkContext(conf=conf)
-    spark = SparkSession(sc)
+    spark_context = SparkContext(conf=conf)
+    spark = SparkSession(spark_context)
 
     # create dataframe
     df = spark.createDataFrame(input_data)
 
     # create vector assembler
     assembler = VectorAssembler(
-        inputCols=["col1", "col2", "col3"], outputCol="features")
+        inputCols=["col_1", "col_2", "col_3"], outputCol="features")
 
     # create linear regression model
     lr = LinearRegression(featuresCol="features", labelCol="label")
@@ -48,4 +48,3 @@ def predict():
 
 if __name__ == '__main__':
     app.run(port=5000)
-``
